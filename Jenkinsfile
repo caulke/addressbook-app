@@ -1,5 +1,5 @@
 pipeline {
- agent { node { label "maven-sonarqube-node" } }
+ agent { node { label "maven-sonarqube-server" } }
  parameters   {
    choice(name: 'aws_account',choices: ['999568710647', '4568366404742', '922266408974','576900672829'], description: 'aws account hosting image registry')
    choice(name: 'Environment',choices: ['Dev', 'QA', 'UAT','Prod'], description: 'Target environment for deployment')
@@ -11,7 +11,7 @@ tools {
     stages {
       stage('1. Git Checkout') {
         steps {
-          git branch: 'release', credentialsId: 'Github-pat', url: 'https://github.com/ndiforfusi/addressbook.git'
+          git branch: 'release', credentialsId: 'Github-pat', url: 'https://github.com/GroupAEKS/addressbook-app'
         }
       }
       stage('2. Build with maven') { 
@@ -28,8 +28,8 @@ tools {
          sh "${tool("SonarQube-Scanner-6.2.1")}/bin/sonar-scanner  \
            -Dsonar.projectKey=addressbook-application \
            -Dsonar.projectName='addressbook-application' \
-           -Dsonar.host.url=https://sonarqube.dominionsystem.org \
-           -Dsonar.token=$sonarqube-token \
+           -Dsonar.host.url=http://54.201.142.70:9000/
+           -Dsonar.token=$sonar-token \
            -Dsonar.sources=src/main/java/ \
            -Dsonar.java.binaries=target/classes"
           }
@@ -46,7 +46,7 @@ tools {
        }
       stage('5. Application deployment in eks') {
         steps{
-          kubeconfig(caCertificate: '',credentialsId: 'k8s-kubeconfig', serverUrl: '') {
+          kubeconfig(caCertificate: '',credentialsId: 'kubeconfig', serverUrl: '') {
           sh "kubectl apply -f manifest"
           }
          }
