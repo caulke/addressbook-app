@@ -28,7 +28,7 @@ tools {
          sh "${tool("SonarQube-Scanner-6.2.1")}/bin/sonar-scanner  \
            -Dsonar.projectKey=addressbook-application \
            -Dsonar.projectName='addressbook-application' \
-           -Dsonar.host.url=http://54.201.142.70:9000/
+           -Dsonar.host.url=http://54.201.142.70:9000 \
            -Dsonar.token=$sonar-token \
            -Dsonar.sources=src/main/java/ \
            -Dsonar.java.binaries=target/classes"
