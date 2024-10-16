@@ -23,7 +23,7 @@ pipeline {
     }
     stage('3. SonarQube Analysis') {
           environment {
-                scannerHome = tool 'SonarQube-Scanner-6.2.1.4610'
+                scannerHome = tool 'SonarQube-Scanner-6.2.1'
             }
             steps {
               withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
