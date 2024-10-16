@@ -26,7 +26,7 @@ pipeline {
                 scannerHome = tool 'SonarQube-Scanner-6.2.1'
             }
             steps {
-              withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+              withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                       sh """
                       ${scannerHome}/bin/sonar-scanner  \
                       -Dsonar.projectKey=addressbook-app \
