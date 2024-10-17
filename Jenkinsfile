@@ -11,7 +11,7 @@ tools {
     stages {
       stage('1. Git Checkout') {
         steps {
-          git branch: 'main', credentialsId: 'Github-pat', url: 'https://github.com/ndiforfusi/addressbook.git'
+          git branch: 'release', credentialsId: 'Github-pat', url: 'https://github.com/GroupAEKS/addressbook-app'
         }
       }
       stage('2. Build with maven') { 
