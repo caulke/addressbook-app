@@ -1,5 +1,5 @@
 pipeline {
-    agent { node { label "maven-sonarqube-server" } }
+    agent { node { label "maven-sonarqube-node" } }
     parameters {
         choice(name: 'aws_account', choices: ['999568710647', '4568366404742', '922266408974', '576900672829'], description: 'aws account hosting image registry')
         choice(name: 'Environment', choices: ['Dev', 'QA', 'UAT', 'Prod'], description: 'Target environment for deployment')
