@@ -6,12 +6,12 @@ pipeline {
    string(name: 'ecr_tag',defaultValue: '1.0.0', description: 'Assign the ecr tag version for the build')
        }
 tools {
-    maven "Maven-3.9.8"
+    maven "maven-3.9.8"
     }
     stages {
       stage('1. Git Checkout') {
         steps {
-          git branch: 'main', credentialsId: 'Github-pat', url: 'https://github.com/ndiforfusi/addressbook.git'
+          git branch: 'main', credentialsId: 'Github-pat', url: 'https://github.com/ndiforfusi/addressbook-app'
         }
       }
       stage('2. Build with maven') { 
