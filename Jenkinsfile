@@ -29,9 +29,9 @@ pipeline {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                     sh """
                     ${scannerHome}/bin/sonar-scanner  \
-                    -Dsonar.projectKey=addressbook-app \
-                    -Dsonar.projectName='addressbook-app' \
-                    -Dsonar.host.url=http://52.24.2.205:9000 \
+                    -Dsonar.projectKey=addressbook-application \
+                    -Dsonar.projectName='addressbook-application' \
+                    -Dsonar.host.url=http://34.217.138.248:9000 \
                     -Dsonar.login=${SONAR_TOKEN} \
                     -Dsonar.sources=src/main/java/ \
                     -Dsonar.java.binaries=target/classes
@@ -42,9 +42,9 @@ pipeline {
         stage('4. Docker Image Build') {
             steps {
                 sh "aws ecr get-login-password --region us-west-2 | sudo docker login --username AWS --password-stdin ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com"
-                sh "sudo docker build -t addressbook ."
-                sh "sudo docker tag addressbook:latest ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/addressbook:${params.ecr_tag}"
-                sh "sudo docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/addressbook:${params.ecr_tag}"
+                sh "sudo docker build -t teama ."
+                sh "sudo docker tag teama:latest ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/teama:${params.ecr_tag}"
+                sh "sudo docker push ${params.aws_account}.dkr.ecr.us-west-2.amazonaws.com/teama:${params.ecr_tag}"
             }
         }
 
